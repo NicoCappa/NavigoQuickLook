@@ -1,0 +1,8 @@
+.javaone-button{
+	
+	-fx-base: red;
+	-fx-rotate: -5;
+	-fx-scale-x: 2.5;
+	-fx-scale-y: 2.5;
+	
+}

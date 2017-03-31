@@ -1,0 +1,24 @@
+/*Unlike extending from the actual button class itself, we no longer get the CSS
+ * of an actual button, so we have to make it ourselves or just copy paste it
+ * from the source of the actual button 
+ * */ 
+
+.javaone-regionbutton{
+	-fx-base: red;
+	-fx-rotate: -5;
+	-fx-scale-x: 2.5;
+	-fx-scale-y: 2.5;
+	
+	/* This is copy and pasted directly from the modena.css file which I think is the source
+	 * for all CSS of the prebuilt controls
+	 * 
+	 * Link to modena file: https://gist.github.com/maxd/63691840fc372f22f470
+	 */
+	-fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+    -fx-text-fill: -fx-text-base-color;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+}

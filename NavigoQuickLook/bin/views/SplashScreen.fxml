@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane fx:id="splashPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="663.0" style="-fx-background-color: ghostwhite;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SplashScreenController">
+   <children>
+      <ImageView fitHeight="522.0" fitWidth="662.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Desktop/Stuff/School/APSCA/NavigoQuickLook/Logo/V1.0/QuickLookTradeMark.png" />
+         </image>
+      </ImageView>
+   </children>
+</StackPane>

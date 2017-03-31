@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+	<children>
+		<Pane fx:id="mainPane" layoutX="31.0" layoutY="31.0" prefHeight="338.0" prefWidth="539.0">
+			<children>
+				<JFXButton fx:id="loginButton" layoutX="138.0" layoutY="237.0" onMouseClicked="#runLogin" prefHeight="37.0" prefWidth="96.0" style="-fx-background-color: #4a98eb;" text="Login">
+					<effect>
+						<DropShadow blurType="ONE_PASS_BOX" color="#269eda" radius="9.2575" width="18.03" />
+					</effect>
+				</JFXButton>
+				<JFXButton fx:id="register" layoutX="299.0" layoutY="237.0" onMouseClicked="#runRegister" prefHeight="37.0" prefWidth="96.0" style="-fx-background-color: #4a98eb;" text="Register">
+					<effect>
+						<DropShadow color="#2b8ba8" />
+					</effect>
+				</JFXButton>
+            <JFXPasswordField fx:id="password" focusColor="#4a98eb" layoutX="147.0" layoutY="157.0" prefHeight="37.0" prefWidth="250.0" promptText="Password">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXPasswordField>
+            <JFXTextField fx:id="userName" focusColor="#4a98eb" layoutX="147.0" layoutY="106.0" prefHeight="37.0" prefWidth="250.0" promptText="Username">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXTextField>
+			</children>
+		</Pane>
+	</children>
+</AnchorPane>
