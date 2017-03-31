@@ -41,12 +41,25 @@ public class MainAppViewController implements Initializable {
 	
 	
 //// News Pane ////    
-	
+	@FXML
+	private AnchorPane newsAnchor;
+
+    @FXML
+    private Pane newsHeader;
+
+    @FXML
+    private Label newsTitle;
+
+    @FXML
+    private Button searchNewsButton;
+
+    @FXML
+    private TextField searchNewsField;
 	@FXML
 	private ScrollPane newsScroll;
 	
 	@FXML
-    private VBox newsPane;
+    private VBox newsPane;	
     
 	
 	@FXML
@@ -94,6 +107,43 @@ public class MainAppViewController implements Initializable {
 	
     @FXML
     private VBox stockBox;
+    
+    @FXML
+    private AnchorPane holdingsAnchor;
+    
+    @FXML
+    private Pane holdingsHeader;
+
+    @FXML
+    private Label holdingsTitle;
+
+    @FXML
+    private Button addStockButton;
+
+    @FXML
+    private TextField addStockField;
+    
+    @FXML
+    private Pane dividersPane;
+
+    @FXML
+    private Label symbolLabe;
+
+    @FXML
+    private Label priceLabe;
+
+    @FXML
+    private Label changeLabe;
+
+    @FXML
+    private Label changePerLabe;
+
+    @FXML
+    private Label volumeLabe;
+
+    @FXML
+    private Label rangeLabe;
+
 
 	
 	//Initialize stocks panel with SPY, DJIA, WYNN, and NVDA. 
@@ -158,6 +208,17 @@ public class MainAppViewController implements Initializable {
 			try {
 				setNews();
 				setStocks();
+				stockBox.getChildren().forEach((StocksPanel) -> {
+					
+					((personalelements.StocksPanel) StocksPanel).layoutElements();
+					
+				});
+				
+				
+//				StocksPanel t = (StocksPanel) stockBox.getChildren().get(1);
+//				t.testMethod();
+				
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

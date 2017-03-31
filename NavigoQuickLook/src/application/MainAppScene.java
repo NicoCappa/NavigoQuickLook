@@ -35,7 +35,7 @@ public class MainAppScene extends Application{
 			
 			
 			window.setScene(scene);
-			
+			window.setTitle("Navigo QuickLook");
 			
 			window.show();
 			

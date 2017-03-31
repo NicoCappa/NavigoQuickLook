@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
@@ -12,10 +13,32 @@
    <children>
       <SplitPane dividerPositions="0.5" layoutX="403.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="692.0" prefWidth="634.0">
         <items>
-            <ScrollPane fx:id="stockScroll" prefHeight="200.0" prefWidth="200.0">
-               <content>
-                  <VBox id="stockBox" fx:id="stockBox" alignment="BOTTOM_LEFT" prefHeight="297.0" prefWidth="633.0" />
-               </content></ScrollPane>
+            <AnchorPane id="holdingsAnchor" fx:id="holdingsAnchor" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane id="dividersPane" fx:id="dividersPane" layoutY="43.0" prefHeight="25.0" prefWidth="632.0">
+                     <children>
+                        <Label id="symbolLabe" fx:id="symbolLabe" layoutX="43.0" layoutY="4.0" text="Symbol" />
+                        <Label id="priceLabe" fx:id="priceLabe" layoutX="133.0" layoutY="4.0" text="Price" />
+                        <Label id="changeLabe" fx:id="changeLabe" layoutX="200.0" layoutY="4.0" prefHeight="17.0" prefWidth="47.0" text="Change" />
+                        <Label id="changePerLabe" fx:id="changePerLabe" layoutX="268.0" layoutY="4.0" prefHeight="17.0" prefWidth="56.0" text="Change %" />
+                        <Label id="volumeLabe" fx:id="volumeLabe" layoutX="362.0" layoutY="4.0" prefHeight="17.0" prefWidth="73.0" text="Volume (3m)" />
+                        <Label id="rangeLabe" fx:id="rangeLabe" layoutX="480.0" layoutY="4.0" prefHeight="17.0" prefWidth="67.0" text="Day Range" />
+                     </children>
+                  </Pane>
+                  <ScrollPane fx:id="stockScroll" layoutX="1.0" layoutY="68.0" prefHeight="270.0" prefWidth="632.0">
+                     <content>
+                        <VBox id="stockBox" fx:id="stockBox" prefHeight="269.0" prefWidth="633.0" />
+                     </content>
+                  </ScrollPane>
+                  <Pane id="holdingsHeader" fx:id="holdingsHeader" layoutX="-2.0" layoutY="-1.0" prefHeight="45.0" prefWidth="635.0" style="-fx-border-width: 0 0 1 0; -fx-border-color: gray;">
+                     <children>
+                        <Label id="searchNewsButton" fx:id="holdingsTitle" layoutX="38.0" layoutY="7.0" prefHeight="31.0" prefWidth="67.0" style="-fx-font-weight: bold; -fx-font-size: 15;" text="Holdings" />
+                        <Button fx:id="addStockButton" layoutX="596.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" />
+                        <TextField id="addStockField" fx:id="addStockField" layoutX="437.0" layoutY="10.0" promptText="Stock Symbol" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
             <AnchorPane id="chartPane" fx:id="chartPane" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Pane layoutX="1.0" prefHeight="45.0" prefWidth="632.0">
@@ -28,10 +51,21 @@
                </children></AnchorPane>
         </items>
       </SplitPane>
-      <ScrollPane id="newsScroll" fx:id="newsScroll" prefHeight="692.0" prefWidth="403.0">
-         <content>
-            <VBox id="newsPane" fx:id="newsPane" prefHeight="692.0" prefWidth="390.0" />
-         </content>
-      </ScrollPane>
+      <AnchorPane id="newsAnchor" fx:id="newsAnchor" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Pane id="newsHeader" fx:id="newsHeader" prefHeight="45.0" prefWidth="403.0" style="-fx-border-width: 0 0 1 0; -fx-border-color: gray;">
+               <children>
+                  <Label id="newsTitle" fx:id="newsTitle" layoutX="38.0" layoutY="7.0" prefHeight="31.0" prefWidth="47.0" style="-fx-font-weight: bold; -fx-font-size: 15;" text="News" />
+                  <Button id="searchNewsButton" fx:id="searchNewsButton" layoutX="351.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" />
+                  <TextField id="searchNewsField" fx:id="searchNewsField" layoutX="195.0" layoutY="10.0" prefHeight="25.0" prefWidth="149.0" promptText="Search News" />
+               </children>
+            </Pane>
+            <ScrollPane id="newsScroll" fx:id="newsScroll" layoutY="46.0" prefHeight="646.0" prefWidth="403.0">
+               <content>
+                  <VBox id="newsPane" fx:id="newsPane" prefHeight="645.0" prefWidth="390.0" />
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
