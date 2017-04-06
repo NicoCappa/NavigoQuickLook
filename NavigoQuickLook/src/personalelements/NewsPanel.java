@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import personalobjects.NewsObject;
 
 public class NewsPanel extends Region {
 	//Fields of the NewsPanel
@@ -24,9 +25,9 @@ public class NewsPanel extends Region {
 	private final Hyperlink link;
 	private final String URLString;
 	//private StringProperty headlineTextProperty = new SimpleStringProperty(this, "text");
-	
-	//Second Constructor
-	public NewsPanel(String headLine, String desc, String URL, double width){	
+
+//Constructor Used For Testing
+	public NewsPanel(String headline, String desc, String URL, double width){	
 		
 		//tells the NewsPanel what CSS class to get its looks from
 		getStyleClass().add("NewsPanel");
@@ -39,7 +40,7 @@ public class NewsPanel extends Region {
 		
 	//// headline ////
 		link = new Hyperlink();
-		link.setText(headLine);
+		link.setText(headline);
 		link.getStyleClass().add("Headline");
 		link.setWrapText(true);
 		link.maxWidthProperty().bind(this.widthProperty());
@@ -74,10 +75,60 @@ public class NewsPanel extends Region {
 		
 	//Adding Components to the region
 		getChildren().add(descriptionLabel);
-		getChildren().add(link);
+		getChildren().add(link);	
+	}
+	
+	
+//Main Constructor (Used for live)
+	public NewsPanel(NewsObject data, double width){	
+		
+		//tells the NewsPanel what CSS class to get its looks from
+		getStyleClass().add("NewsPanel");
+		
+	//// Sizing the Region //// 
+		
+		this.setMinWidth(width);	
+		this.setMinHeight(100);		
+		
+		
+	//// headline ////
+		link = new Hyperlink();
+		link.setText(data.getHeadline());
+		link.getStyleClass().add("Headline");
+		link.setWrapText(true);
+		link.maxWidthProperty().bind(this.widthProperty());
+		link.setTextAlignment(TextAlignment.CENTER);
+		
+	
+		//positioning
+		link.layoutXProperty().bind(this.widthProperty().divide(2).subtract(link.widthProperty().divide(2)));
+		link.layoutYProperty().bind(this.heightProperty().multiply(.05));
+
+		
+	//// Description //// 
+		descriptionLabel = new Label(data.getDesc());
+		descriptionLabel.setTextAlignment(TextAlignment.CENTER);
+		descriptionLabel.prefWidth(200);
+		descriptionLabel.maxHeight(20);
+		descriptionLabel.setWrapText(true);
+		descriptionLabel.maxWidthProperty().bind(this.widthProperty());
+		
+		//Positioning
+		descriptionLabel.layoutYProperty().bind(link.layoutYProperty().add(40));
 		
 		
 		
+		
+		descriptionLabel.getStyleClass().add("Description");
+
+
+	//// Link ////
+		URLString = data.getUrl();
+		
+		
+	//Adding Components to the region
+		getChildren().add(descriptionLabel);
+		getChildren().add(link);	
 	}
 	
 	
@@ -113,6 +164,14 @@ public class NewsPanel extends Region {
 		
 //		System.out.println("%%%%%%%%%%");
 //		System.out.println(descriptionLabel.getWidth());
+		
+	}
+	
+//// Getters and Setters ////
+	
+	//headline text
+	public String getHeadlineText(){
+		return this.link.getText();
 		
 	}
 	

@@ -49,5 +49,33 @@ public class NewsGatherer {
 		return news_list;
 	}
 	
+	//Gets news data, compares it to news data already in view, returns updated news data
+	public ArrayList<NewsObject> updateNewsData(String stopHeadLine) throws IOException{
+		
+		Document doc = Jsoup.connect("http://www.reuters.com/finance/markets").get();
+		
+		ArrayList<NewsObject> updatedNewsList = new ArrayList<NewsObject>();
+		ArrayList<NewsObject> emptyList = new ArrayList<NewsObject>();
+
+		for(Element article : doc.select(".story")){	
+			String newsTitle = article.select(".story-title").text();
+			
+			if(!newsTitle.equals(stopHeadLine)){
+				String newsDescription = article.select("p").text();
+				String newsUrl = article.select("a").attr("href"); 
+				updatedNewsList.add(new NewsObject(newsTitle, newsUrl, newsDescription));
+				
+				
+			}
+			else {
+				updatedNewsList.add(new NewsObject("End", "End", "End" ));
+				break;
+			}			
+		}
+
+		return updatedNewsList;
+		
+	}
+	
 	
 }

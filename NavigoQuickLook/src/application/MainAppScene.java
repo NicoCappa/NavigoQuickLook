@@ -25,11 +25,12 @@ public class MainAppScene extends Application{
 	}
 	
 	
+	static Stage window;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 						
-			Stage window = primaryStage;
+			window = primaryStage;
 			Parent root = FXMLLoader.load(getClass().getResource("/views/MainAppView.fxml"));
 			Scene scene = new Scene(root);
 			
@@ -46,4 +47,12 @@ public class MainAppScene extends Application{
 		}
 	}
 
+	
+//Getters and Setters
+	public static Stage getStage(){		
+		return window; 
+		
+	}
+	
+	
 }

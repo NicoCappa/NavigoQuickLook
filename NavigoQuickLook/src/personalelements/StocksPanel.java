@@ -5,29 +5,35 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import personalobjects.StockInfo;
 
 public class StocksPanel extends Region {
 
 	//Fields 
 	Label symbol;
 	Label change;
+	Label changePer;
 	Label company;
 	Label price;
 	double changeNumb; 
+	String exchange;
 	
 //// Constructors //// 
-	public StocksPanel(String symb, String pri, String chan, String comp, double width){
+	public StocksPanel(StockInfo stockInf, double width){
 		
+				
 	//Giving CSS to the Region
 		this.getStyleClass().add("stockspanel");
+		
+	//Setting property values (Non-viewable)
+		exchange = stockInf.getExchange();
 		
 	//Sizing the StocksPanel
 		this.setMinWidth(width);
 		this.setMinHeight(50);
 		
-		
 	//Symbol Label
-		symbol = new Label(symb);
+		symbol = new Label(stockInf.getSymbol());
 		symbol.getStyleClass().add("symbol");
 		
 		//positioning
@@ -49,15 +55,15 @@ public class StocksPanel extends Region {
 		company.setWrapText(true);
 		
 	//Price Label
-		price = new Label(pri);
+		price = new Label(stockInf.getPrice());
 		price.getStyleClass().add("price");
 		
 		//positioning
 		//price.layoutXProperty().bind(symbol.layoutXProperty().add(this.widthProperty().subtract(150)));
-		price.layoutYProperty().bind(symbol.layoutYProperty().subtract(5));
+		price.layoutYProperty().bind(symbol.layoutYProperty());
 		
 	//Change Label
-		change = new Label(chan);	
+		change = new Label(stockInf.getDollarChange());	
 		change.getStyleClass().add("change");
 		
 		//positioning
@@ -67,12 +73,23 @@ public class StocksPanel extends Region {
 		change.maxWidthProperty().bind(price.widthProperty().add(150));
 		
 		//Methods
-		colorizeChange();
 		
+
+	//ChangePer Label
+		changePer = new Label(stockInf.getPercentChange() + "%");
+		changePer.getStyleClass().add("change");
+		
+		//positioning
+		changePer.layoutYProperty().bind(symbol.layoutYProperty());
+		changePer.setWrapText(true);
+		changePer.maxWidthProperty().bind(price.widthProperty().add(150));
+		
+		colorizeChange();
 	//Adding components to the region
 		this.getChildren().add(symbol);
 		this.getChildren().add(price);
 		this.getChildren().add(change);
+		this.getChildren().add(changePer);
 		this.getChildren().add(company);
 		
 		
@@ -90,42 +107,43 @@ public class StocksPanel extends Region {
 	}
 	
 //// Methods //// 
+	
+	//Changes color of changeLabel based on positive or negative change
 	private void colorizeChange(){
 		
 		String changeString = this.change.getText();
 		
-		int index = changeString.indexOf("+");
+		int index = changeString.indexOf("-");
 		 
-		System.out.println("*****");
-		System.out.println(index);
-		System.out.println("*****");
 		
 		if (index > -1){
+			this.change.setStyle("-fx-text-fill: red;");
+			this.changePer.setStyle("-fx-text-fill: red;");
 			
-			this.change.setStyle("-fx-text-fill: green;");
 		}
 		else {
-			this.change.setStyle("-fx-text-fill: red;");
-			
+			this.change.setStyle("-fx-text-fill: green;");
+			this.changePer.setStyle("-fx-text-fill: green;");
 		}	
 	}
 	
+	//Layouts the elements of the control
 	public void layoutElements(){
 		
 		Parent one = this.getParent().getParent();
 		Parent two = one.getParent().getParent().getParent();
 		
 		Node symbolLabe = (two.lookup("#symbolLabe"));
-		
 		Node priceLabe =  (two.lookup("#priceLabe"));
 		Node changeLabe = (two.lookup("#changeLabe"));
+		Node changePerLabe = (two.lookup("#changePerLabe"));
 		
-		System.out.println("****/////****");
-		System.out.println(one);
-		System.out.println(symbolLabe);
-		System.out.println(symbolLabe.layoutXProperty());
-		System.out.println("****/////****");
-		
+//		System.out.println("****/////****");
+//		System.out.println(one);
+//		System.out.println(symbolLabe);
+//		System.out.println(changeLabe.layoutXProperty());
+//		System.out.println("****/////****");
+//		
 		
 	//Symbol
 		symbol.layoutXProperty().bind(symbolLabe.layoutXProperty());
@@ -140,5 +158,43 @@ public class StocksPanel extends Region {
 	//Change
 		change.layoutXProperty().bind(changeLabe.layoutXProperty());
 		
+	//ChangePer 
+		changePer.layoutXProperty().bind(changePerLabe.layoutXProperty());
+		
 	}
+	
+//// Getters ////
+	
+	public String getSymbol(){
+		return this.symbol.getText();		
+	}
+	
+	//fix this
+	public String getExchange(){
+		return this.exchange;		
+	}
+	
+	public String getPrice(){
+		String priceWithSign = this.price.getText();
+		//removes dollar sign
+		String price = priceWithSign.replace("$", "");
+		return price;
+	}
+	
+//// Setters //// 
+	//sets the text in the price label
+	public void setPrice(String price){
+		this.price.setText(price);
+	}
+	
+	//sets both the dollar change label and percentage Change Label
+	public void setChange(String dolChange, String perChange){
+		this.change.setText(dolChange);
+		this.changePer.setText(perChange);
+		
+	}
+	
+	
+	
+	
 }
