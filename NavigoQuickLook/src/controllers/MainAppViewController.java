@@ -382,7 +382,7 @@ public class MainAppViewController implements Initializable {
 //							System.out.println(updatedInfo.get(count).getDollarChange());
 							
 							panel.setPrice(updatedInfo.get(count).getPrice());
-							panel.setChange(updatedInfo.get(count).getDollarChange(), updatedInfo.get(count).getPercentChange());
+							panel.setChange(updatedInfo.get(count).getDollarChange(), updatedInfo.get(count).getPercentChange() + "%");
 							
 						}
 					});
@@ -393,7 +393,7 @@ public class MainAppViewController implements Initializable {
 			}
 			
 		
-		}, 10000, 10000);
+		}, 60000, 60000);
 		
 		
 		

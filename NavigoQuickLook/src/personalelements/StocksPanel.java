@@ -17,6 +17,7 @@ public class StocksPanel extends Region {
 	Label price;
 	double changeNumb; 
 	String exchange;
+	String previousClose;
 	
 //// Constructors //// 
 	public StocksPanel(StockInfo stockInf, double width){
@@ -27,6 +28,7 @@ public class StocksPanel extends Region {
 		
 	//Setting property values (Non-viewable)
 		exchange = stockInf.getExchange();
+		previousClose = stockInf.getPrevClose();
 		
 	//Sizing the StocksPanel
 		this.setMinWidth(width);
@@ -181,6 +183,9 @@ public class StocksPanel extends Region {
 		return price;
 	}
 	
+	public String getPrevClose(){
+		return this.previousClose;
+	}
 //// Setters //// 
 	//sets the text in the price label
 	public void setPrice(String price){

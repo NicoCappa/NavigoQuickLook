@@ -34,6 +34,12 @@ public class StockGatherer {
 	
 	public StockInfo gatherStockData(String symbol) throws IOException{		
 		Document doc = Jsoup.connect("http://www.msn.com/en-us/money/stockdetails?symbol=US:" + symbol).get();
+		Document markWat = Jsoup.connect("http://www.marketwatch.com/investing/stock/" + symbol).get();
+		String preCl = markWat.select(".table__cell.u-semi").text();
+		
+		String[] extTract = preCl.split(" ");
+		String previousClose = extTract[0].replace("$", "");
+		
 		String exchange = doc.select(".live-quote-subtitle").text();
 		exchange.trim();
 		String[] exDet = exchange.split(":");
@@ -65,7 +71,7 @@ public class StockGatherer {
 				System.out.println(percent);
 				System.out.println("--------------");
 				
-				StockInfo info = new StockInfo(symbol, price, dollar, percent, exDet[0], "volumePlaceHolder");
+				StockInfo info = new StockInfo(symbol, price, dollar, percent, exDet[0], previousClose);
 				return info;
 			}
 			
@@ -99,7 +105,7 @@ public class StockGatherer {
 				String percent = temp[4].trim();
 				
 				
-				StockInfo info = new StockInfo(symbol, price, dollar, percent, exDet[0], "volumePlaceHolder");
+				StockInfo info = new StockInfo(symbol, price, dollar, percent, exDet[0], previousClose);
 				return info;
 			}
 			
@@ -119,6 +125,8 @@ public class StockGatherer {
 	//Returns updated stock info 
 	public ArrayList<StockInfo> updateStockInfo(ArrayList<StocksPanel> panelList) throws IOException{
 		
+			System.out.println("Updating...");
+		
 			DecimalFormat dollarForm = new DecimalFormat("#.##");
 			DecimalFormat percentForm = new DecimalFormat("#.##");
 		
@@ -134,19 +142,19 @@ public class StockGatherer {
 				}
 					
 				String pri = doc.select("#last-price-value").text();
-				String openPri = doc.select("#open-price").text();
+				String prevClose = stock.getPrevClose();
 				
 				
 				//CHANGE THIS YOU MORON
 				//PERCENT CHANGE IS BASED ON OPENING PRICE NOT 
 				//LAST PRICE TRADED DIMWIT STILL NEEDS FIXING
 				
-				double openPrice = Double.parseDouble(openPri);				
+				double previousClose = Double.parseDouble(prevClose);				
 				double newPrice = Double.parseDouble(pri);
 				
 				
-				double dolChange = newPrice - openPrice;
-				double perChange = (dolChange/openPrice) * 100;
+				double dolChange = newPrice - previousClose;
+				double perChange = (dolChange/previousClose) * 100;
 				//formatting for upcoming method
 				
 				

@@ -11,6 +11,7 @@ public class StockInfo {
 	String volume;
 	String avgVolume;
 	String exchange;
+	String previousClose; 
 	
 	
 	public StockInfo(String pri, String dolChange, String perChange){
@@ -44,14 +45,14 @@ public class StockInfo {
 	}
 	
 	//Constructor #2 SYMBOL/PRICE/DOLLAR/PERCENT
-	public StockInfo(String symb, String pri, String dollarChan, String percent, String XCHAN, String vol){
+	public StockInfo(String symb, String pri, String dollarChan, String percent, String XCHAN, String prevC){
 		
 		symbol = symb;
 		price = pri;
 		dollarChange = dollarChan;
 		percentChange = percent;
 		exchange = XCHAN;
-		volume = vol;
+		previousClose = prevC;
 	
 	}
 	
@@ -116,6 +117,10 @@ public class StockInfo {
 
 	public String getExchange() {
 		return this.exchange;
+	}
+	
+	public String getPrevClose(){
+		return this.previousClose;
 	}
 	
 	
